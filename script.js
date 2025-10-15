@@ -24,12 +24,11 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="col-span-1 flex justify-center">
                 <button type="button" class="remove-btn text-slate-400 hover:text-red-500 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-                        </button>
-                    </div>
-                `;
+                </button>
+            </div>
+        `;
         componentsContainer.appendChild(row);
     };
-
 
     createComponentRow('Bài Tập Về Nhà', 5, '', false);
     createComponentRow('Chuyên Cần', 5, '', false);
@@ -37,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
     createComponentRow('Phát Biểu & Thảo Luận', 5, '', false);
     createComponentRow('Thực Hành & Thực Tế', 15, '', false);
     createComponentRow('Kiểm Tra Cuối Kỳ', 55, '', true);
-
 
     addComponentBtn.addEventListener('click', () => createComponentRow());
 
@@ -55,6 +53,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         checkbox.checked = false;
                     }
                 });
+            }
+        }
+    });
+
+    componentsContainer.addEventListener('input', function(e) {
+        if (e.target.classList.contains('component-score')) {
+            if (parseFloat(e.target.value) > 10) {
+                alert('Điểm không hợp lệ. Vui lòng chỉ nhập điểm trong thang điểm 10.');
+                e.target.value = '';
             }
         }
     });
@@ -91,12 +98,18 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        if (totalWeight > 100) {
+            alert('Tổng trọng số đã vượt quá 100%. Vui lòng kiểm tra lại.');
+            resultDiv.classList.add('hidden'); 
+            return;
+        }
+
         const finalScore = parseFloat(totalWeightedScore.toFixed(2));
         let letterGrade, classification, status, statusClass, score4, note = '';
         let isFailed = false;
 
         const noteEl = document.getElementById('note');
-        if (totalWeight !== 100) {
+        if (totalWeight < 100) {
             note = `Lưu ý: Tổng trọng số hiện tại là ${totalWeight}%, không phải 100%.`;
             noteEl.className = 'text-center font-medium mt-4 text-sm text-orange-600';
         } else {
