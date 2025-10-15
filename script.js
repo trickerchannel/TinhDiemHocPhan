@@ -3,6 +3,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const addComponentBtn = document.getElementById('add-component-btn');
     const gradeForm = document.getElementById('grade-form');
     const resultDiv = document.getElementById('result');
+    const currentTotalWeightEl = document.getElementById('current-total-weight');
+
+    const updateTotalWeight = () => {
+        let totalWeight = 0;
+        const rows = componentsContainer.querySelectorAll('.component-row');
+        rows.forEach(row => {
+            const weightInput = row.querySelector('.component-weight');
+            const weight = parseFloat(weightInput.value);
+            if (!isNaN(weight) && weight > 0) {
+                totalWeight += weight;
+            }
+        });
+        currentTotalWeightEl.textContent = `${totalWeight}%`;
+
+        currentTotalWeightEl.classList.remove('text-blue-600', 'text-green-600', 'text-red-600');
+        if (totalWeight > 100) {
+            currentTotalWeightEl.classList.add('text-red-600');
+        } else if (totalWeight === 100) {
+            currentTotalWeightEl.classList.add('text-green-600');
+        } else {
+            currentTotalWeightEl.classList.add('text-blue-600');
+        }
+    };
 
     const createComponentRow = (name = '', weight = '', score = '', isFinal = false) => {
         const row = document.createElement('div');
@@ -36,12 +59,17 @@ document.addEventListener('DOMContentLoaded', function() {
     createComponentRow('Phát Biểu & Thảo Luận', 5, '', false);
     createComponentRow('Thực Hành & Thực Tế', 15, '', false);
     createComponentRow('Kiểm Tra Cuối Kỳ', 55, '', true);
+    updateTotalWeight();
 
-    addComponentBtn.addEventListener('click', () => createComponentRow());
+    addComponentBtn.addEventListener('click', () => {
+        createComponentRow();
+        updateTotalWeight();
+    });
 
     componentsContainer.addEventListener('click', function(e) {
         if (e.target.closest('.remove-btn')) {
             e.target.closest('.component-row').remove();
+            updateTotalWeight();
         }
     });
 
@@ -49,9 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target.classList.contains('component-final')) {
             if (e.target.checked) {
                 document.querySelectorAll('.component-final').forEach(checkbox => {
-                    if (checkbox !== e.target) {
-                        checkbox.checked = false;
-                    }
+                    if (checkbox !== e.target) checkbox.checked = false;
                 });
             }
         }
@@ -63,6 +89,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Điểm không hợp lệ. Vui lòng chỉ nhập điểm trong thang điểm 10.');
                 e.target.value = '';
             }
+        }
+        if (e.target.classList.contains('component-weight')) {
+            updateTotalWeight();
         }
     });
 
@@ -100,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (totalWeight > 100) {
             alert('Tổng trọng số đã vượt quá 100%. Vui lòng kiểm tra lại.');
-            resultDiv.classList.add('hidden'); 
+            resultDiv.classList.add('hidden');
             return;
         }
 
