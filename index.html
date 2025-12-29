@@ -3,11 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Công cụ Tính điểm & Dự báo điểm thi</title>
+    <meta name="description" content="Công cụ tính điểm trung bình môn, quy đổi điểm hệ 4, điểm chữ và dự báo điểm thi cuối kỳ chính xác dành cho sinh viên. Hỗ trợ giao diện Dark Mode hiện đại. Phát triển bởi Hoan IT.">
+    <meta name="keywords" content="tính điểm đại học, quy đổi điểm hệ 4, dự báo điểm thi, công cụ tính điểm, GPA calculator, Hoan IT">
+    <meta name="author" content="Hoan IT">
+    <meta name="robots" content="index, follow">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hoanit.id.vn/">
+    <meta property="og:title" content="Công cụ Tính điểm & Dự báo điểm thi - Hoan IT">
+    <meta property="og:description" content="Nhập điểm thành phần để tính kết quả hoặc dự báo điểm thi cuối kỳ cần đạt. Hỗ trợ Dark Mode.">
+    <meta property="og:image" content="https://hoanit.id.vn/assets/thumbnail-grade-tool.png">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Công cụ Tính điểm & Dự báo điểm thi - Hoan IT">
+    <meta property="twitter:description" content="Công cụ tính điểm và dự báo điểm thi dành cho sinh viên.">
+
+    <title>Công cụ Tính điểm & Dự báo điểm thi - Hoan IT</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' }</script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Công cụ Tính điểm & Dự báo điểm thi",
+      "url": "https://hoanit.id.vn/",
+      "description": "Công cụ hỗ trợ sinh viên tính điểm trung bình môn, quy đổi sang hệ 4, điểm chữ và dự báo điểm thi cuối kỳ cần đạt.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "author": {
+        "@type": "Person",
+        "name": "Hoan IT",
+        "url": "https://hoanit.id.vn/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "VND"
+      },
+      "featureList": "Tính điểm hệ 10/4/chữ, Dự báo điểm thi, Dark Mode"
+    }
+    </script>
 </head>
 <body class="bg-slate-100 dark:bg-slate-900 min-h-screen flex flex-col font-sans transition-colors duration-300">
 
@@ -20,11 +60,11 @@
                 <h1 class="text-xl font-bold text-slate-800 dark:text-white">Công cụ Tính điểm</h1>
             </div>
             <div class="flex items-center gap-4">
-                <button id="theme-toggle" class="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-yellow-400 transition-colors focus:outline-none">
+                <button id="theme-toggle" class="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-yellow-400 transition-colors focus:outline-none" aria-label="Toggle Dark Mode">
                     <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                     <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                 </button>
-                <a href="#" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">By: Hoan IT</a>
+                <a href="https://hoanit.id.vn" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">By: Hoan IT</a>
             </div>
         </nav>
     </header>
@@ -131,7 +171,7 @@
 
     <footer class="bg-white dark:bg-slate-800 mt-auto transition-colors duration-300">
         <div class="container mx-auto px-6 py-4 text-center text-sm text-slate-500 dark:text-slate-400">
-            <p>&copy; 2025 - Phát triển bởi <a href="#" class="font-bold hover:underline hover:text-blue-600 dark:hover:text-blue-400">Hoan IT</a>.</p>
+            <p>&copy; 2025 - Phát triển bởi <a href="https://hoanit.id.vn" class="font-bold hover:underline hover:text-blue-600 dark:hover:text-blue-400">Hoan IT</a>.</p>
         </div>
     </footer>
     <script src="script.js" defer></script>
