@@ -1,140 +1,139 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="transition-colors duration-300">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Công cụ Tính điểm Học phần</title>
+    <title>Công cụ Tính điểm & Dự báo điểm thi</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script>tailwind.config = { darkMode: 'class' }</script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="logo.png">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8140509124746009"
-     crossorigin="anonymous"></script>
 </head>
-<body class="bg-slate-100 min-h-screen flex flex-col">
+<body class="bg-slate-100 dark:bg-slate-900 min-h-screen flex flex-col font-sans transition-colors duration-300">
 
-    <header class="bg-white shadow-sm sticky top-0 z-20">
+    <header class="bg-white dark:bg-slate-800 shadow-sm sticky top-0 z-20 transition-colors duration-300">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <svg class="h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <svg class="h-8 w-8 text-blue-600 dark:text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                 </svg>
-                <h1 class="text-xl font-bold text-slate-800">Công cụ Tính điểm</h1>
+                <h1 class="text-xl font-bold text-slate-800 dark:text-white">Công cụ Tính điểm</h1>
             </div>
-            <div>
-                <a href="https://hoanit.id.vn/" target="_blank" class="text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors">By: Hoan IT</a>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-yellow-400 transition-colors focus:outline-none">
+                    <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                </button>
+                <a href="#" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">By: Hoan IT</a>
             </div>
         </nav>
     </header>
 
     <main class="flex-grow flex items-center justify-center p-4 py-8">
-        <div class="w-full max-w-3xl bg-white rounded-2xl shadow-xl p-6 md:p-10">
+        <div class="w-full max-w-3xl bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 md:p-10 transition-colors duration-300">
             
             <div class="text-center mb-8">
                 <h1 class="text-3xl md:text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-sky-500 pb-2">
-                    Công cụ Tính điểm Học phần
+                    Tính điểm & Dự báo
                 </h1>
-                <p class="text-slate-500 mt-2">Nhập các cột điểm và trọng số (%) để xem kết quả chi tiết. <br> Hãy thay đổi nội dung cột điểm để phù hợp với môn học cần tính điểm.</p>
+                <p class="text-slate-500 dark:text-slate-400 mt-2">Nhập điểm thành phần để tính kết quả hoặc dự báo điểm thi cuối kỳ cần đạt.</p>
             </div>
 
             <form id="grade-form" class="space-y-4">
-                <div class="grid grid-cols-12 gap-2 md:gap-4 items-center px-2 py-2 bg-slate-50 rounded-lg text-sm font-semibold text-slate-600">
+                <div class="grid grid-cols-12 gap-2 md:gap-4 items-center px-2 py-2 bg-slate-50 dark:bg-slate-700 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300">
                     <div class="col-span-5">Tên Cột Điểm</div>
-                    <div class="col-span-2 text-center flex items-center justify-center gap-1 relative has-tooltip">
-                        <span>Trọng số (%)</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        <div class="tooltip absolute bottom-full mb-2 w-64 bg-slate-800 text-white text-sm rounded-lg shadow-lg p-3 z-10 text-left pointer-events-none">
-                            <p class="font-bold">Trọng số là gì?</p>
-                            <p class="mt-1 font-normal">Tương ứng với cột <strong>% Điểm tối đa</strong> trong <strong>Bảng điểm cá nhân.</strong> <strong class="text-yellow-300">Tổng trọng số của tất cả các cột phải là 100%</strong> để đảm bảo kết quả chính xác nhất.</p>
-                        </div>
-                    </div>
-                    <div class="col-span-2 text-center flex items-center justify-center gap-1 relative has-tooltip">
-                        <span>Điểm (0-10)</span>
-                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        <div class="tooltip absolute bottom-full mb-2 w-64 bg-slate-800 text-white text-sm rounded-lg shadow-lg p-3 z-10 text-left pointer-events-none">
-                            <p class="font-bold">Thang điểm quy định?</p>
-                            <p class="mt-1 font-normal">Vui lòng nhập điểm theo <strong class="text-yellow-300">thang điểm 10</strong>. Công cụ có hỗ trợ tính số thập phân, ví dụ: 8.5, 7.8...</p>
-                        </div>
-                    </div>
-                    <div class="col-span-2 text-center flex items-center justify-center gap-1 relative has-tooltip">
-                        <span>Thi cuối kỳ?</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        <div class="tooltip absolute bottom-full mb-2 w-64 bg-slate-800 text-white text-sm rounded-lg shadow-lg p-3 z-10 text-left pointer-events-none">
-                            <p class="font-bold">Tại sao cột này quan trọng?</p>
-                            <p class="mt-1 font-normal">Theo quy chế, nếu điểm thi kết thúc học phần <strong class="text-yellow-300">&lt; 1.0 điểm</strong>, bạn sẽ bị tính là <strong class="text-red-400">"Nợ môn" (điểm F)</strong> bất kể tổng điểm của bạn như thế nào.</p>
-                            <p class="mt-2 font-normal">Hãy tích vào ô này để công cụ áp dụng đúng quy tắc điểm liệt.</p>
-                        </div>
-                    </div>
+                    <div class="col-span-2 text-center">Trọng số (%)</div>
+                    <div class="col-span-2 text-center">Điểm (0-10)</div>
+                    <div class="col-span-2 text-center">Thi cuối kỳ?</div>
                     <div class="col-span-1"></div>
                 </div>
 
-                <div id="components-container" class="space-y-2">
-                </div>
+                <div id="components-container" class="space-y-2"></div>
 
-                <div class="text-right font-semibold text-slate-700 pr-2 pt-2">
+                <div class="text-right font-semibold text-slate-700 dark:text-slate-300 pr-2 pt-2">
                     Tổng trọng số hiện tại: 
                     <span id="current-total-weight" class="font-bold text-lg transition-colors">0%</span>
                 </div>
 
-                <button type="button" id="add-component-btn" class="w-full text-blue-600 font-semibold py-2.5 px-4 rounded-lg border-2 border-dashed border-slate-300 hover:bg-slate-50 hover:border-blue-500 transition-all duration-300 flex items-center justify-center gap-2">
+                <button type="button" id="add-component-btn" class="w-full text-blue-600 dark:text-blue-400 font-semibold py-2.5 px-4 rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-blue-500 transition-all duration-300 flex items-center justify-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" /></svg>
                     Thêm Cột Điểm
                 </button>
 
-                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-sky-500 text-white font-bold py-3 px-4 rounded-lg hover:from-blue-700 hover:to-sky-600 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-lg shadow-blue-500/30">
-                    Tính toán Kết quả
-                </button>
+                <div class="grid grid-cols-2 gap-4 pt-2">
+                    <button type="button" id="predict-btn" class="w-full bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 font-bold py-3 px-4 rounded-lg border-2 border-blue-600 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-slate-600 transition-all focus:outline-none focus:ring-4 focus:ring-blue-100 dark:focus:ring-slate-600">
+                        Dự tính điểm thi
+                    </button>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-sky-500 text-white font-bold py-3 px-4 rounded-lg hover:from-blue-700 hover:to-sky-600 transition-all focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-lg">
+                        Tính kết quả
+                    </button>
+                </div>
             </form>
             
             <div id="result" class="mt-10 hidden">
-                <div class="border-t border-slate-200 pt-6">
-                     <h2 class="text-2xl font-bold text-center text-slate-800 mb-6">Kết quả Học tập Chi tiết</h2>
-                    <div class="bg-slate-50 rounded-lg p-6 space-y-4 text-base">
+                <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
+                     <h2 class="text-2xl font-bold text-center text-slate-800 dark:text-white mb-6">Kết quả Học tập</h2>
+                    <div class="bg-slate-50 dark:bg-slate-700 rounded-lg p-6 space-y-4 text-base">
                         <div class="flex justify-between items-center">
-                            <span class="text-slate-600">Tổng trọng số đã nhập:</span>
-                            <span id="total-weight" class="font-bold text-slate-800 bg-slate-200 px-2 py-0.5 rounded"></span>
+                            <span class="text-slate-600 dark:text-slate-300">Tổng trọng số:</span>
+                            <span id="total-weight" class="font-bold text-slate-800 dark:text-white bg-slate-200 dark:bg-slate-600 px-2 py-0.5 rounded"></span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-slate-600">Điểm tổng kết (hệ 10):</span>
-                            <span id="final-score" class="font-bold text-2xl text-blue-600"></span>
+                            <span class="text-slate-600 dark:text-slate-300">Điểm tổng kết (hệ 10):</span>
+                            <span id="final-score" class="font-bold text-2xl text-blue-600 dark:text-blue-400"></span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-slate-600">Điểm hệ 4:</span>
-                            <span id="score-4" class="font-bold text-slate-800"></span>
+                            <span class="text-slate-600 dark:text-slate-300">Điểm hệ 4:</span>
+                            <span id="score-4" class="font-bold text-slate-800 dark:text-white"></span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-slate-600">Điểm chữ:</span>
-                            <span id="letter-grade" class="font-bold text-slate-800"></span>
+                            <span class="text-slate-600 dark:text-slate-300">Điểm chữ:</span>
+                            <span id="letter-grade" class="font-bold text-slate-800 dark:text-white"></span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-slate-600">Xếp loại học phần:</span>
-                            <span id="classification" class="font-bold text-slate-800"></span>
+                            <span class="text-slate-600 dark:text-slate-300">Xếp loại:</span>
+                            <span id="classification" class="font-bold text-slate-800 dark:text-white"></span>
                         </div>
-                        <div class="border-t border-slate-200 my-2"></div>
+                        <div class="border-t border-slate-200 dark:border-slate-600 my-2"></div>
                         <div class="flex justify-between items-center pt-2">
-                            <span class="text-slate-600 font-semibold">Kết quả cuối cùng:</span>
+                            <span class="text-slate-600 dark:text-slate-300 font-semibold">Trạng thái:</span>
                             <span id="status" class="font-bold text-xl px-4 py-1.5 rounded-full"></span>
                         </div>
                     </div>
-                    <p id="note" class="text-center font-medium mt-4 text-sm"></p>
+                    <p id="note" class="text-center font-medium mt-4 text-sm dark:text-slate-300"></p>
+                </div>
+            </div>
+
+            <div id="prediction-result" class="mt-6 hidden">
+                <div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3 w-full">
+                            <h3 class="text-sm leading-5 font-medium text-yellow-800 dark:text-yellow-300">
+                                Dự báo điểm thi cuối kỳ
+                            </h3>
+                            <div class="mt-2 text-sm leading-5 text-yellow-700 dark:text-yellow-200/80">
+                                <p id="prediction-text" class="mb-2"></p>
+                                <ul id="prediction-list" class="list-disc pl-5 space-y-1"></ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
         </div>
     </main>
 
-    <footer class="bg-white mt-auto">
-        <div class="container mx-auto px-6 py-4 text-center text-sm text-slate-500">
-            <p>&copy; 2025 - Phát triển bởi <a href="https://hoanit.id.vn/" target="_blank" >Hoan IT</a>.</p>
+    <footer class="bg-white dark:bg-slate-800 mt-auto transition-colors duration-300">
+        <div class="container mx-auto px-6 py-4 text-center text-sm text-slate-500 dark:text-slate-400">
+            <p>&copy; 2025 - Phát triển bởi <a href="#" class="font-bold hover:underline hover:text-blue-600 dark:hover:text-blue-400">Hoan IT</a>.</p>
         </div>
     </footer>
     <script src="script.js" defer></script>
 </body>
-
 </html>
-
-
-
-
